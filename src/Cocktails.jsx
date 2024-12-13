@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 const Cocktails = () => {
-  const [cocktails, setCocktails] = useState([]); // Cocktail list
-  const [search, setSearch] = useState(""); // Search query
-  const [filterType, setFilterType] = useState("name"); // Filter type (name, first letter, etc.)
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [cocktails, setCocktails] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filterType, setFilterType] = useState("name");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Fetch data based on filter type
   const fetchCocktails = async () => {
     setLoading(true);
     setError(null);
@@ -52,7 +51,6 @@ const Cocktails = () => {
     }
   };
 
-  // Fetch data on search or filter type change
   useEffect(() => {
     if (search || filterType === "random") {
       fetchCocktails();
@@ -60,12 +58,9 @@ const Cocktails = () => {
   }, [search, filterType]);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Cocktails Explorer
-      </h2>
+    <div className="p-6 min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-slate-300">
+      <h2 className="text-4xl font-extrabold mb-6 text-center">Cocktails Explorer</h2>
 
-      {/* Search and Filters */}
       <div className="mb-8">
         <div className="flex justify-center items-center gap-4">
           <input
@@ -73,14 +68,14 @@ const Cocktails = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search for a cocktail..."
-            className="p-2 border rounded w-full max-w-md focus:ring focus:ring-blue-300"
+            className="p-3 border rounded w-full max-w-md focus:ring focus:ring-pink-300 text-gray-800"
             disabled={filterType === "random"}
           />
 
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="p-2 border rounded focus:ring focus:ring-blue-300"
+            className="p-3 border rounded focus:ring focus:ring-pink-300 text-gray-800"
           >
             <option value="name">Search by Name</option>
             <option value="firstLetter">Search by First Letter</option>
@@ -92,38 +87,27 @@ const Cocktails = () => {
         </div>
       </div>
 
-      {/* Loading State */}
-      {loading && <p className="text-center text-gray-600">Loading...</p>}
+      {loading && <p className="text-center text-gray-200">Loading...</p>}
 
-      {/* Error State */}
-      {error && (
-        <p className="text-center text-red-500 font-medium mb-4">{error}</p>
-      )}
+      {error && <p className="text-center text-red-300 font-medium mb-4">{error}</p>}
 
-      {/* Cocktail List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {cocktails.length > 0 ? (
           cocktails.map((cocktail) => (
             <div
               key={cocktail.idDrink}
-              className="p-4 border rounded shadow-md bg-white hover:shadow-lg transition duration-300"
+              className="p-4 border rounded-lg shadow-lg bg-white text-gray-800 hover:shadow-xl transition duration-300"
             >
               <img
                 src={cocktail.strDrinkThumb}
                 alt={cocktail.strDrink}
                 className="w-full h-48 object-cover rounded mb-4"
               />
-              <h3 className="text-lg font-bold text-gray-800">
-                {cocktail.strDrink}
-              </h3>
-              <p className="text-sm text-gray-600">
-                {cocktail.strCategory || "Unknown Category"}
-              </p>
-              <p className="text-sm text-gray-600">
-                {cocktail.strAlcoholic || "Unknown Type"}
-              </p>
+              <h3 className="text-lg font-bold">{cocktail.strDrink}</h3>
+              <p className="text-sm">{cocktail.strCategory || "Unknown Category"}</p>
+              <p className="text-sm">{cocktail.strAlcoholic || "Unknown Type"}</p>
               <button
-                className="mt-4 bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
+                className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                 onClick={() =>
                   alert(
                     `Ingredients: ${cocktail.strIngredient1}, ${cocktail.strIngredient2}, ...`
@@ -135,11 +119,7 @@ const Cocktails = () => {
             </div>
           ))
         ) : (
-          !loading && (
-            <p className="text-center text-gray-500 col-span-full">
-              No cocktails found.
-            </p>
-          )
+          !loading && <p className="text-center col-span-full">No cocktails found.</p>
         )}
       </div>
     </div>
