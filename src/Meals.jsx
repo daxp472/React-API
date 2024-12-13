@@ -108,7 +108,7 @@ const Meals = () => {
       {/* Footer */}
       <footer className="mt-8 text-center text-white">
         <p className="text-sm">
-          🍳 Made with love for foodies | Powered by{" "}
+          🍳 Made with love for foodies | Powered by{" Dax Patel "}
           <a
             href="https://www.themealdb.com/"
             target="_blank"
