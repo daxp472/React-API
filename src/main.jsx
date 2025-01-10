@@ -6,6 +6,7 @@ import Meals from './Meals';
 import Bank from './Banks';
 import Cocktails from './Cocktails';
 import Potter from './Potter';
+import Github from './github'
 
 const Main = () => {
   return (
@@ -25,6 +26,9 @@ const Main = () => {
             </li>
             <li className="transform hover:scale-110 transition duration-300">
               <Link to="/potter" className="hover:text-gray-100">Potter</Link>
+            </li>
+            <li className="transform hover:scale-110 transition duration-300">
+              <Link to="/github" className="hover:text-gray-100">Github</Link>
             </li>
           </ul>
         </nav>
@@ -73,6 +77,7 @@ const Main = () => {
             <Route path="/banks" element={<Bank />} />
             <Route path="/cocktails" element={<Cocktails />} />
             <Route path="/potter" element={<Potter />} />
+            <Route path="/github" element={<Github />} />
           </Routes>
         </main>
 
